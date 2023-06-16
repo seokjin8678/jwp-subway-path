@@ -24,35 +24,35 @@ public class StationService {
         if (stationRepository.existsByName(request.getName())) {
             throw new DuplicateStationException("중복된 역 이름 입니다.");
         }
-        Station station = new Station(request.getName());
-        stationRepository.save(station);
-        return StationResponse.of(station);
+        Station station = new Station(null, request.getName());
+        Station savedStation = stationRepository.save(station);
+        return StationResponse.from(savedStation);
     }
 
-    public StationResponse findStationResponseById(Long id) {
-        return StationResponse.of(findStationById(id));
+    public StationResponse findStationResponseById(Long stationId) {
+        return StationResponse.from(findStationById(stationId));
     }
 
-    private Station findStationById(Long id) {
-        return stationRepository.findById(id)
+    private Station findStationById(Long stationId) {
+        return stationRepository.findById(stationId)
                 .orElseThrow(() -> new StationNotFoundException("해당 역을 찾을 수 없습니다."));
     }
 
     public List<StationResponse> findAllStationResponses() {
         List<Station> stations = stationRepository.findAll();
         return stations.stream()
-                .map(StationResponse::of)
+                .map(StationResponse::from)
                 .collect(toList());
     }
 
     @Transactional
-    public void updateStation(Long id, StationRequest request) {
-        Station station = findStationById(id);
+    public void updateStation(Long stationId, StationRequest request) {
+        Station station = findStationById(stationId);
         station.changeName(request.getName());
     }
 
     @Transactional
-    public void deleteStationById(Long id) {
-        stationRepository.deleteById(id);
+    public void deleteStationById(Long stationId) {
+        stationRepository.deleteById(stationId);
     }
 }

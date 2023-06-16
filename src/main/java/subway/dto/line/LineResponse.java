@@ -11,7 +11,7 @@ public class LineResponse {
     private String name;
     private String color;
 
-    public static LineResponse of(Line line) {
+    public static LineResponse from(Line line) {
         return new LineResponse(line.getId(), line.getName(), line.getColor());
     }
 }

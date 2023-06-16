@@ -6,9 +6,11 @@ import org.springframework.data.repository.Repository;
 import subway.domain.station.Station;
 
 public interface StationRepository extends Repository<Station, Long> {
-    void save(Station station);
+    Station save(Station station);
 
     Optional<Station> findById(Long id);
+
+    Optional<Station> findByName(String name);
 
     List<Station> findAll();
 

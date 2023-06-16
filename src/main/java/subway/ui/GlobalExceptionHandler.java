@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import subway.dto.response.Response;
 import subway.exception.line.DuplicateLineException;
+import subway.exception.line.IllegalSectionException;
 import subway.exception.line.LineNotFoundException;
 import subway.exception.station.DuplicateStationException;
 import subway.exception.station.StationNotFoundException;
@@ -45,6 +46,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(StationNotFoundException.class)
     public ResponseEntity<Response> handleStationNotFoundException(StationNotFoundException e) {
+        return Response.badRequest()
+                .message(e.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(IllegalSectionException.class)
+    public ResponseEntity<Response> handleIllegalSectionException(IllegalSectionException e) {
         return Response.badRequest()
                 .message(e.getMessage())
                 .build();

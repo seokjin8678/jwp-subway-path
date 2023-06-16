@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import subway.dto.line.LineRequest;
 import subway.dto.line.LineResponse;
 import subway.dto.response.Response;
+import subway.dto.section.SectionCreateRequest;
+import subway.dto.section.SectionDeleteRequest;
+import subway.dto.section.SectionResponse;
 import subway.service.LineService;
 
 @RestController
@@ -64,6 +67,33 @@ public class LineController {
         lineService.deleteLineById(lineId);
         return Response.ok()
                 .message("노선이 삭제되었습니다.")
+                .build();
+    }
+
+    @GetMapping("/{lineId}/sections")
+    public ResponseEntity<Response> findAllSectionsById(@PathVariable Long lineId) {
+        List<SectionResponse> responses = lineService.findSectionsById(lineId);
+        return Response.ok()
+                .message(responses.size() + "개의 구간이 조회되었습니다.")
+                .result(responses)
+                .build();
+    }
+
+    @PostMapping("/{lineId}/sections")
+    public ResponseEntity<Response> createSectionById(@PathVariable Long lineId,
+                                                      @RequestBody SectionCreateRequest request) {
+        lineService.addSection(lineId, request);
+        return Response.ok()
+                .message("구간이 생성되었습니다.")
+                .build();
+    }
+
+    @DeleteMapping("/{lineId}/sections")
+    public ResponseEntity<Response> deleteSectionById(@PathVariable Long lineId,
+                                                      @RequestBody SectionDeleteRequest request) {
+        lineService.deleteSection(lineId, request);
+        return Response.ok()
+                .message("구간이 삭제되었습니다.")
                 .build();
     }
 }

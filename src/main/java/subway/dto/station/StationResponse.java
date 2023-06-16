@@ -10,7 +10,7 @@ public class StationResponse {
     private Long id;
     private String name;
 
-    public static StationResponse of(Station station) {
+    public static StationResponse from(Station station) {
         return new StationResponse(station.getId(), station.getName());
     }
 }
