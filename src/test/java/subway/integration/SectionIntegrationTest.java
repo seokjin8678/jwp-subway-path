@@ -72,8 +72,8 @@ class SectionIntegrationTest {
         mockMvc.perform(get("/lines/{lineId}/sections", lineId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("1개의 구간이 조회되었습니다."))
-                .andExpect(jsonPath("$.result[0].startStationName").value("잠실역"))
-                .andExpect(jsonPath("$.result[0].endStationName").value("삼성역"))
+                .andExpect(jsonPath("$.result[0].upBoundStationName").value("잠실역"))
+                .andExpect(jsonPath("$.result[0].downBoundStationName").value("삼성역"))
                 .andExpect(jsonPath("$.result[0].distance").value(50));
     }
 
@@ -87,11 +87,11 @@ class SectionIntegrationTest {
         mockMvc.perform(get("/lines/{lineId}/sections", lineId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("2개의 구간이 조회되었습니다."))
-                .andExpect(jsonPath("$.result[0].startStationName").value("잠실역"))
-                .andExpect(jsonPath("$.result[0].endStationName").value("대구역"))
+                .andExpect(jsonPath("$.result[0].upBoundStationName").value("잠실역"))
+                .andExpect(jsonPath("$.result[0].downBoundStationName").value("대구역"))
                 .andExpect(jsonPath("$.result[0].distance").value(20))
-                .andExpect(jsonPath("$.result[1].startStationName").value("대구역"))
-                .andExpect(jsonPath("$.result[1].endStationName").value("삼성역"))
+                .andExpect(jsonPath("$.result[1].upBoundStationName").value("대구역"))
+                .andExpect(jsonPath("$.result[1].downBoundStationName").value("삼성역"))
                 .andExpect(jsonPath("$.result[1].distance").value(30));
     }
 
@@ -105,11 +105,11 @@ class SectionIntegrationTest {
         mockMvc.perform(get("/lines/{lineId}/sections", lineId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("2개의 구간이 조회되었습니다."))
-                .andExpect(jsonPath("$.result[0].startStationName").value("대구역"))
-                .andExpect(jsonPath("$.result[0].endStationName").value("잠실역"))
+                .andExpect(jsonPath("$.result[0].upBoundStationName").value("대구역"))
+                .andExpect(jsonPath("$.result[0].downBoundStationName").value("잠실역"))
                 .andExpect(jsonPath("$.result[0].distance").value(20))
-                .andExpect(jsonPath("$.result[1].startStationName").value("잠실역"))
-                .andExpect(jsonPath("$.result[1].endStationName").value("삼성역"))
+                .andExpect(jsonPath("$.result[1].upBoundStationName").value("잠실역"))
+                .andExpect(jsonPath("$.result[1].downBoundStationName").value("삼성역"))
                 .andExpect(jsonPath("$.result[1].distance").value(50));
     }
 
@@ -123,11 +123,11 @@ class SectionIntegrationTest {
         mockMvc.perform(get("/lines/{lineId}/sections", lineId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("2개의 구간이 조회되었습니다."))
-                .andExpect(jsonPath("$.result[0].startStationName").value("잠실역"))
-                .andExpect(jsonPath("$.result[0].endStationName").value("삼성역"))
+                .andExpect(jsonPath("$.result[0].upBoundStationName").value("잠실역"))
+                .andExpect(jsonPath("$.result[0].downBoundStationName").value("삼성역"))
                 .andExpect(jsonPath("$.result[0].distance").value(50))
-                .andExpect(jsonPath("$.result[1].startStationName").value("삼성역"))
-                .andExpect(jsonPath("$.result[1].endStationName").value("대구역"))
+                .andExpect(jsonPath("$.result[1].upBoundStationName").value("삼성역"))
+                .andExpect(jsonPath("$.result[1].downBoundStationName").value("대구역"))
                 .andExpect(jsonPath("$.result[1].distance").value(20));
     }
 
@@ -218,8 +218,8 @@ class SectionIntegrationTest {
         // then
         mockMvc.perform(get("/lines/{lineId}/sections", lineId))
                 .andExpect(jsonPath("$.message").value("1개의 구간이 조회되었습니다."))
-                .andExpect(jsonPath("$.result[0].startStationName").value("잠실역"))
-                .andExpect(jsonPath("$.result[0].endStationName").value("대구역"))
+                .andExpect(jsonPath("$.result[0].upBoundStationName").value("잠실역"))
+                .andExpect(jsonPath("$.result[0].downBoundStationName").value("대구역"))
                 .andExpect(jsonPath("$.result[0].distance").value(100));
     }
 
@@ -260,8 +260,8 @@ class SectionIntegrationTest {
         // then
         mockMvc.perform(get("/lines/{lineId}/sections", lineId))
                 .andExpect(jsonPath("$.message").value("1개의 구간이 조회되었습니다."))
-                .andExpect(jsonPath("$.result[0].startStationName").value("삼성역"))
-                .andExpect(jsonPath("$.result[0].endStationName").value("대구역"))
+                .andExpect(jsonPath("$.result[0].upBoundStationName").value("삼성역"))
+                .andExpect(jsonPath("$.result[0].downBoundStationName").value("대구역"))
                 .andExpect(jsonPath("$.result[0].distance").value(50));
     }
 
@@ -286,8 +286,8 @@ class SectionIntegrationTest {
         // then
         mockMvc.perform(get("/lines/{lineId}/sections", lineId))
                 .andExpect(jsonPath("$.message").value("1개의 구간이 조회되었습니다."))
-                .andExpect(jsonPath("$.result[0].startStationName").value("잠실역"))
-                .andExpect(jsonPath("$.result[0].endStationName").value("삼성역"))
+                .andExpect(jsonPath("$.result[0].upBoundStationName").value("잠실역"))
+                .andExpect(jsonPath("$.result[0].downBoundStationName").value("삼성역"))
                 .andExpect(jsonPath("$.result[0].distance").value(50));
     }
 
@@ -306,8 +306,8 @@ class SectionIntegrationTest {
                 .andExpect(jsonPath("$.message").value("삭제하려는 역이 구간에 없습니다."));
     }
 
-    void addSection(String startStationName, String endStationName, int distance) throws Exception {
-        SectionCreateRequest createRequest = new SectionCreateRequest(startStationName, endStationName, distance);
+    void addSection(String upBoundStationName, String downBoundStationName, int distance) throws Exception {
+        SectionCreateRequest createRequest = new SectionCreateRequest(upBoundStationName, downBoundStationName, distance);
         mockMvc.perform(post("/lines/{lineId}/sections", lineId)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(createRequest)));
